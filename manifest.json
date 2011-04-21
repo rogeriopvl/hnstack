@@ -1,0 +1,10 @@
+{
+	"name": "Hacker News Stack",
+	"version": "0.1",
+	"description": "Make the hacker news front page like a stack: first read, first out",
+	"browser_action": {
+		"default_icon": "icon.png"
+	},
+	"permissions": [],
+	"content_scripts": ["matches": "http://news.ycombinator.com/*", "scripts": "hnstack.js"]
+}
