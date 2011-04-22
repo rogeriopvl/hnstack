@@ -8,7 +8,9 @@
 	"content_scripts": [
 		{
 			"matches": ["http://news.ycombinator.com/*"],
-			"js": ["hnstack.js"]
+			"css": ["style.css"],
+			"js": ["hnstack.js"],
+			"run_at": "document_end"
 		}
 	]
 }
