@@ -7,6 +7,9 @@
  * @version 0.1
  * @license BSD (check LICENSE file)
  */
+
+chrome.extension.sendRequest("show_page_action");
+
 window.addEventListener("load", function(){
 
 	var tables = document.getElementsByTagName("table");

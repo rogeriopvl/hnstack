@@ -2,9 +2,12 @@
 	"name": "Hacker News Stack",
 	"version": "0.1",
 	"description": "Make the hacker news front page like a stack: first read, first out",
-	"browser_action": {
-		"default_icon": "icon.png"
+	"icons": {
+		"16": "icon16.jpg",
+		"48": "icon48.jpg",
+		"128": "icon128.jpg"
 	},
+	"background_page": "background.html",
 	"content_scripts": [
 		{
 			"matches": ["http://news.ycombinator.com/*"],
@@ -12,5 +15,9 @@
 			"js": ["hnstack.js"],
 			"run_at": "document_end"
 		}
-	]
+	],
+	"page_action": {
+		"default_title": "blabla",
+		"default_icon": "icon19.png"
+	}
 }
