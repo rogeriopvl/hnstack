@@ -16,25 +16,30 @@ window.addEventListener("load", function(){
 	var itemsTable = tables[2];
 	itemsTable.id = "hn_items";
 
+	var tableBody = itemsTable.getElementsByTagName("tbody")[0];
+	tableBody.innerHTML += "<tr height=\"10px\"></tr><tr><td colspan=\"2\"></td><td class=\"title\"><h3>Read Items</h3></td><tr>";
+
 	var tableRows = itemsTable.getElementsByTagName("tr");
 
 	for (var i=0; i<tableRows.length; i++) {
 
 		var rowLinks = tableRows[i].getElementsByTagName("a");
 
-		if (rowLinks[0] && rowLinks[0].id.indexOf("up_") != -1) {
+		if (tableRows[i].className != "read_item" && rowLinks[0] && rowLinks[0].id.indexOf("up_") != -1) {
 			tableRows[i].id = rowLinks[0].id;
 
 			if (hasReadEntry(rowLinks[0].id)) {
-				tableRows[i].className = "to_remove";
-				if (tableRows[i+1]) {
-					tableRows[i+1].className = "to_remove";
+				tableRows[i].className = "read_item";
+				var nextTr = tableRows[i+1];
+				tableBody.appendChild(tableRows[i]);
+				if (nextTr) {
+					nextTr.className = "read_item";
+					tableBody.appendChild(nextTr);
 				}
 			}
 			else {
 				tableRows[i].addEventListener("click", function(){
 					markEntryHasRead(this.id);
-					//this.style.display = "none";
 				});
 			}
 		}

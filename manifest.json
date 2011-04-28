@@ -10,7 +10,7 @@
 	"background_page": "background.html",
 	"content_scripts": [
 		{
-			"matches": ["http://news.ycombinator.com/*"],
+			"matches": ["http://news.ycombinator.com/", "http://news.ycombinator.com/news", "http://news.ycombinator.com/newest", "http://news.ycombinator.com/x*"],
 			"css": ["style.css"],
 			"js": ["hnstack.js"],
 			"run_at": "document_end"
