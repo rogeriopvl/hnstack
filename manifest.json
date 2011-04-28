@@ -3,9 +3,9 @@
 	"version": "0.1",
 	"description": "Make the hacker news front page like a stack: first read, first out",
 	"icons": {
-		"16": "images/icon16.jpg",
-		"48": "images/icon48.jpg",
-		"128": "images/icon128.jpg"
+		"16": "images/hn16.png",
+		"48": "images/hn48.png",
+		"128": "images/hn128.png"
 	},
 	"background_page": "background.html",
 	"content_scripts": [
@@ -18,6 +18,6 @@
 	],
 	"page_action": {
 		"default_title": "Hacker News Stack",
-		"default_icon": "images/icon19.png"
+		"default_icon": "images/hn19.png"
 	}
 }
