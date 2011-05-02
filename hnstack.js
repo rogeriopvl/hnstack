@@ -16,29 +16,47 @@ window.addEventListener("load", function(){
 	var itemsTable = tables[2];
 	itemsTable.id = "hn_items";
 
+	// get the news table
 	var tableBody = itemsTable.getElementsByTagName("tbody")[0];
-	tableBody.innerHTML += "<tr height=\"10px\"></tr><tr><td colspan=\"2\"></td><td class=\"title\"><h3>Read Items</h3></td><tr>";
+	
+	// create the table extension dividing the unread items from the read items
+	var trSpacer = document.createElement("tr");
+	trSpacer.style.height = "30px";
+	tableBody.appendChild(trSpacer);
+	
+	var trReadItems = document.createElement("tr");
+	trReadItems.innerHTML = "<td colspan=\"2\"></td><td class=\"title\"><h3>Read Items</h3></td>";
+	tableBody.appendChild(trReadItems);
 
 	var tableRows = itemsTable.getElementsByTagName("tr");
 
 	for (var i=0; i<tableRows.length; i++) {
 
-		var rowLinks = tableRows[i].getElementsByTagName("a");
+		// ignore empty tr
+		if (!tableRows[i].hasChildNodes()) {
+			continue;
+		}
+		
+		var rowTitles = tableRows[i].getElementsByClassName("title");
+		
+		if (tableRows[i].className != "read_item" && rowTitles.length == 0) {
 
-		if (tableRows[i].className != "read_item" && rowLinks[0] && rowLinks[0].id.indexOf("up_") != -1) {
-			tableRows[i].id = rowLinks[0].id;
+			var rowSpan = tableRows[i].getElementsByTagName("span");
+			tableRows[i-1].id = rowSpan[0].id;
 
-			if (hasReadEntry(rowLinks[0].id)) {
-				tableRows[i].className = "read_item";
-				var nextTr = tableRows[i+1];
-				tableBody.appendChild(tableRows[i]);
-				if (nextTr) {
-					nextTr.className = "read_item";
-					tableBody.appendChild(nextTr);
-				}
+			if (hasReadEntry(rowSpan[0].id)) {
+				var currentTr = tableRows[i];
+				currentTr.className = "read_item";
+				tableBody.appendChild(tableRows[i-1]);
+				tableBody.appendChild(currentTr);
+				
+				var trSpacer = document.createElement("tr");
+				trSpacer.style.height = "5px";
+				tableBody.appendChild(trSpacer);
 			}
 			else {
-				tableRows[i].addEventListener("click", function(){
+				var previousTr = tableRows[i-1];
+				previousTr.addEventListener("click", function(){
 					markEntryHasRead(this.id);
 				});
 			}
