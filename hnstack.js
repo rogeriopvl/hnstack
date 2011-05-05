@@ -11,7 +11,7 @@
 chrome.extension.sendRequest("show_page_action");
 
 window.addEventListener("load", function(){
-
+		
 	var tables = document.getElementsByTagName("table");
 	var itemsTable = tables[2];
 	itemsTable.id = "hn_items";
@@ -42,9 +42,10 @@ window.addEventListener("load", function(){
 		if (tableRows[i].className != "read_item" && rowTitles.length == 0) {
 
 			var rowSpan = tableRows[i].getElementsByTagName("span");
-			tableRows[i-1].id = rowSpan[0].id;
+			var itemID = rowSpan[0].id.substr(6); // remove the score_ prefix
+			tableRows[i-1].id = itemID;
 
-			if (hasReadEntry(rowSpan[0].id)) {
+			if (hasReadEntry(itemID)) {
 				var currentTr = tableRows[i];
 				currentTr.className = "read_item";
 				tableBody.appendChild(tableRows[i-1]);
@@ -68,6 +69,7 @@ window.addEventListener("load", function(){
 /* Adds an entry to the localStorage string */
 function markEntryHasRead(id) {
 	if (localStorage["hnstack_entries"]) {
+		cleanupOldEntries();
 		localStorage["hnstack_entries"] += (id+";");
 	}
 	else {
@@ -78,4 +80,12 @@ function markEntryHasRead(id) {
 /* Checks if and entry is in the localStorage string */
 function hasReadEntry(id) {
 	return localStorage["hnstack_entries"] ? localStorage["hnstack_entries"].indexOf(id) != -1 : false;
+}
+
+/* Removes entries that are 2 weeks old */
+function cleanupOldEntries() {
+	if (localStorage["hnstack_entries"].length >= 10000) {
+		var firstMarker = localStorage["hnstack_entries"].indexOf(";");
+		localStorage["hnstack_entries"] = localStorage["hnstack_entries"].substr(firstMarker+1);
+	}
 }
