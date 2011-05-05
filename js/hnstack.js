@@ -1,6 +1,6 @@
 /**
  * This chrome extension walks through the hacker news website < http://news.ycombinator.com >
- * and hides entries that have already been clicked on.
+ * and changes entries that have already been clicked on to the bottom of the page.
  * The read entries are stored in the localStorage database with the key "hnstack_entries".
  *
  * @author Rogério Vicente < http://rogeriopvl.com >

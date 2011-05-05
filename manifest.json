@@ -11,8 +11,7 @@
 	"content_scripts": [
 		{
 			"matches": ["http://news.ycombinator.com/", "http://news.ycombinator.com/news", "http://news.ycombinator.com/newest", "http://news.ycombinator.com/x*"],
-			"css": ["style.css"],
-			"js": ["hnstack.js"],
+			"js": ["js/hnstack.js"],
 			"run_at": "document_end"
 		}
 	],
