@@ -43,9 +43,11 @@ window.addEventListener("load", function(){
 
 			var rowSpan = tableRows[i].getElementsByTagName("span");
 			var itemID = rowSpan[0].id.substr(6); // remove the score_ prefix
-			tableRows[i-1].id = itemID;
 
 			if (hasReadEntry(itemID)) {
+				if (tableRows[i-2]) {
+					tableRows[i-2].style.height = "0";
+				}
 				var currentTr = tableRows[i];
 				currentTr.className = "read_item";
 				tableBody.appendChild(tableRows[i-1]);
@@ -57,7 +59,10 @@ window.addEventListener("load", function(){
 			}
 			else {
 				var previousTr = tableRows[i-1];
-				previousTr.addEventListener("click", function(){
+				var tdItems = previousTr.getElementsByTagName("td");
+				var mainTd = tdItems[tdItems.length-1];
+				mainTd.id = itemID;
+				mainTd.addEventListener("click", function(){
 					markEntryHasRead(this.id);
 				});
 			}
