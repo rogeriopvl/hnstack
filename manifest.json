@@ -1,7 +1,7 @@
 {
 	"name": "Hacker News Stack",
 	"version": "0.1",
-	"description": "Focus on the really fresh and unread news in YCombinator - Hacker News. This extensions relocates read items into the bottom of the website.",
+	"description": "Focus on the really fresh and unread news in YCombinator - Hacker News. Relocate read items into the bottom of the website.",
 	"icons": {
 		"16": "images/hn16.png",
 		"48": "images/hn48.png",
