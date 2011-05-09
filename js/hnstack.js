@@ -11,7 +11,8 @@
 chrome.extension.sendRequest("show_page_action");
 
 window.addEventListener("load", function(){
-		
+	
+	var isEmpty = true;
 	var tables = document.getElementsByTagName("table");
 	var itemsTable = tables[2];
 	itemsTable.id = "hn_items";
@@ -25,7 +26,7 @@ window.addEventListener("load", function(){
 	tableBody.appendChild(trSpacer);
 	
 	var trReadItems = document.createElement("tr");
-	trReadItems.innerHTML = "<td colspan=\"2\"></td><td class=\"title\"><h3>Read Items</h3></td>";
+	trReadItems.innerHTML = "<td colspan=\"2\"></td><td class=\"title\"><h3>Read News</h3></td>";
 	tableBody.appendChild(trReadItems);
 
 	var tableRows = itemsTable.getElementsByTagName("tr");
@@ -45,6 +46,7 @@ window.addEventListener("load", function(){
 			var itemID = rowSpan[0].id.substr(6); // remove the score_ prefix
 
 			if (hasReadEntry(itemID)) {
+				isEmpty = false;
 				if (tableRows[i-2]) {
 					tableRows[i-2].style.height = "0";
 				}
@@ -68,6 +70,12 @@ window.addEventListener("load", function(){
 			}
 		}
 		else { continue; }
+	}
+	
+	if (isEmpty) {
+		var trEmptyMessage = document.createElement("tr");
+		trEmptyMessage.innerHTML = "<td colspan=2></td><td>This is the place where the read news will appear. Click a news item and it will show up here when you return to this page.</td>";
+		tableBody.appendChild(trEmptyMessage);
 	}
 });
 
