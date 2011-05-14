@@ -43,6 +43,7 @@ window.addEventListener("load", function(){
 		if (tableRows[i].className != "read_item" && rowTitles.length == 0) {
 
 			var rowSpan = tableRows[i].getElementsByTagName("span");
+			if (rowSpan.length < 1) { continue; }
 			var itemID = rowSpan[0].id.substr(6); // remove the score_ prefix
 
 			if (hasReadEntry(itemID)) {
