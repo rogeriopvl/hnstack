@@ -4,7 +4,7 @@
  * The read entries are stored in the localStorage database with the key "hnstack_entries".
  *
  * @author Rogério Vicente < http://rogeriopvl.com >
- * @version 0.2
+ * @version 0.3
  * @license BSD (check LICENSE file)
  */
 
