@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+        <style type="text/css" media="screen">
+            * { margin: 0; padding: 0; }
+            body {
+                width: 200px;
+                height: auto;
+                font-family: "Helvetica Neue", Helvetica, sans-serif;
+                font-size: 11px;
+            }
+            ul { list-style: none; }
+            li {
+                background-color: #f6f6ef;
+                padding: 5px;
+                cursor: pointer;
+                border-bottom-left-radius: 4px;
+                border-bottom-right-radius: 4px;
+            }
+            li:hover { background-color: #ccc; }
+            h3 {
+                text-align: center;
+                border-top-left-radius: 4px;
+                border-top-right-radius: 4px;
+            }
+            .title {
+                margin-bottom: 0px;
+                background-color: #ff6600;
+                padding: 5px;
+            }
+        </style>
+	</head>
+	<body>
+        <h3 class="title">Hacker News Stack</h3>
+        <ul>
+        	<li id="clean_button">Clean storage ...</li>
+        </ul>
+
+        <script type="text/javascript" charset="utf-8">
+            var cleanButton = document.getElementById('clean_button');
+            cleanButton.addEventListener('click', function(){
+                cleanButton.innerHTML = 'Clear!';
+                chrome.tabs.getSelected(null, function(stab) {
+                    chrome.tabs.executeScript(stab.id, {code: "localStorage['hnstack_entries'] = '';"});
+                });
+            });
+        </script>
+	</body>
+</html>
