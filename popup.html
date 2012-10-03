@@ -24,6 +24,10 @@
                 border-top-left-radius: 4px;
                 border-top-right-radius: 4px;
             }
+            p {
+                padding: 10px;
+                text-align: center;
+            }
             .title {
                 margin-bottom: 0px;
                 background-color: #ff6600;
@@ -33,18 +37,6 @@
 	</head>
 	<body>
         <h3 class="title">Hacker News Stack</h3>
-        <ul>
-        	<li id="clean_button">Clean storage ...</li>
-        </ul>
-
-        <script type="text/javascript" charset="utf-8">
-            var cleanButton = document.getElementById('clean_button');
-            cleanButton.addEventListener('click', function(){
-                cleanButton.innerHTML = 'Clear!';
-                chrome.tabs.getSelected(null, function(stab) {
-                    chrome.tabs.executeScript(stab.id, {code: "localStorage['hnstack_entries'] = '';"});
-                });
-            });
-        </script>
+        <p>Developed by Rogério Vicente</p>
 	</body>
 </html>
