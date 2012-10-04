@@ -112,8 +112,11 @@ HNStack.prototype.parseReadItems = function(){
  * @param {String} id the id of the entry to mark has read
  */
 HNStack.prototype.markRead = function(id){
-	if (localStorage.hnstack_entries) {
-        this.cleanup();
+	if (localStorage.hnstack_entries){
+        // check if storage has more than 500 entries, if so, trim it
+        if ((localStorage.hnstack_entries.match(/;/g)||[]).length > 501){
+            this.cleanup();
+        }
 		localStorage.hnstack_entries += (id+";");
 	}
 	else {
@@ -130,13 +133,12 @@ HNStack.prototype.isRead = function(id){
 };
 
 /**
- * Removes entries from storage that are two weeks old
+ * Removes first half entries from storage
  * This function is just to control the size of storage to avoid performance issues
  */
 HNStack.prototype.cleanup = function(){
-	if (localStorage.hnstack_entries.length >= 10000){
-        var auxStr = localStorage.hnstack_entries.substr(6999);
-		var firstMarker = auxStr.indexOf(";");
-		localStorage.hnstack_entries = auxStr.substr(firstMarker);
-    }
+    var cutPoint = Math.round(localStorage.hnstack_entries.length / 2);
+    var auxStr = localStorage.hnstack_entries.substr(cutPoint);
+    var firstMarker = auxStr.indexOf(";");
+    localStorage.hnstack_entries = auxStr.substr(firstMarker);
 };
