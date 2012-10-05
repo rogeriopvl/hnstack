@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
 	"name": "Hacker News Stack",
-	"version": "0.4",
+	"version": "0.5",
 	"description": "Focus on the really fresh and unread news in YCombinator - Hacker News. Relocate read items into the bottom of the website.",
 	"icons": {
 		"16": "images/hn16.png",
@@ -20,6 +20,7 @@
 	],
 	"page_action": {
 		"default_title": "Hacker News Stack",
-		"default_icon": "images/hn19.png"
+		"default_icon": "images/hn19.png",
+        "default_popup": "popup.html"
 	}
 }
