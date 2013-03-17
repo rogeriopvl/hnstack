@@ -13,7 +13,7 @@
     },
 	"content_scripts": [
 		{
-			"matches": ["http://news.ycombinator.com/", "http://news.ycombinator.com/news", "http://news.ycombinator.com/newest", "http://news.ycombinator.com/x*"],
+			"matches": ["*://news.ycombinator.com/", "*://news.ycombinator.com/news", "*://news.ycombinator.com/newest", "*://news.ycombinator.com/x*"],
 			"js": ["js/hnstack.js"],
 			"run_at": "document_end"
 		}
