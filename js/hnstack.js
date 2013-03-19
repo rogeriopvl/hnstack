@@ -4,7 +4,7 @@
  * The read entries are stored in the localStorage database with the key "hnstack_entries".
  *
  * @author Rogério Vicente < http://rogeriopvl.com >
- * @version 0.6.0
+ * @version 0.6.1
  * @license BSD (check LICENSE file)
  */
 
@@ -20,6 +20,9 @@ window.addEventListener("load", function(){
  * HNStack constructor
  */
 var HNStack = function(){
+    // initialize localStorage if its first run
+    localStorage.hnstack_entries = localStorage.hnstack_entries || "";
+
     var mainTable = document.getElementsByTagName("table")[2];
     mainTable.id = "hn_items";
 
