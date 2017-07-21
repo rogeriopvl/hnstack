@@ -1,0 +1,26 @@
+{
+  "private": true,
+  "name": "hnstack",
+  "version": "1.0.0",
+  "description": "Focus on the really fresh and unread news in YCombinator - Hacker News. Relocate read items into the bottom of the website.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rogeriopvl/hnstack.git"
+  },
+  "keywords": [
+    "chrome",
+    "extension",
+    "hacker",
+    "news"
+  ],
+  "author": "rogeriopvl",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rogeriopvl/hnstack/issues"
+  },
+  "homepage": "https://github.com/rogeriopvl/hnstack#readme"
+}
