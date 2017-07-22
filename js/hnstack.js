@@ -1,5 +1,3 @@
-/* global chrome, localStorage */
-
 /**
  * This chrome extension walks through the hacker news website < http://news.ycombinator.com >
  * and changes entries that have already been clicked on to the bottom of the page.
@@ -14,29 +12,19 @@ window.addEventListener('load', function () {
   hnstack.parseReadItems()
 })
 
-/**
- * HNStack constructor
- */
 var HNStack = function () {
   // initialize localStorage if its first run
   localStorage.hnstack_entries = localStorage.hnstack_entries || ''
 
-  var mainTable = document.getElementsByTagName('table')[2]
-  mainTable.id = 'hn_items'
-
-  this.newsTable = mainTable.getElementsByTagName('tbody')[0]
+  var mainTable = document.querySelector('.itemlist')
+  this.newsTable = mainTable.querySelector('tbody')
   this.noReadItems = true
 }
 
-/**
- * Creates a new set of <tr> elements in the table
- * to contain the items that were read.
- */
 HNStack.prototype.renderReadContainer = function () {
-  // create the tr spacer
   var trSpacer = document.createElement('tr')
   trSpacer.style.height = '30px'
-  // create the read items header
+
   var trReadItems = document.createElement('tr')
   trReadItems.innerHTML =
     '<td colspan="2"></td><td class="title"><h3>Read News</h3></td>'
@@ -45,59 +33,33 @@ HNStack.prototype.renderReadContainer = function () {
   this.newsTable.appendChild(trReadItems)
 }
 
-/**
- * Hide the table items that were read
- */
 HNStack.prototype.parseReadItems = function () {
-  var tableRows = this.newsTable.getElementsByTagName('tr')
-
-  // callback for the click event
   var self = this
-  var clickCallback = function () {
-    self.markRead(this.id)
-  }
 
-  for (var i = 0; i < tableRows.length; i++) {
-    // ignore empty tr
-    if (!tableRows[i].hasChildNodes()) {
-      continue
-    }
-
-    var rowTitles = tableRows[i].getElementsByClassName('title')
-
-    if (tableRows[i].className !== 'read_item' && rowTitles.length === 0) {
-      var rowSpan = tableRows[i].getElementsByTagName('span')
-      if (rowSpan.length < 1) {
-        continue
-      }
-      var itemID = rowSpan[0].id.substr(6) // remove the score_ prefix
-
-      if (this.isRead(itemID)) {
-        this.noReadItems = false
-        if (tableRows[i - 2]) {
-          tableRows[i - 2].style.height = '0'
-        }
-        var currentTr = tableRows[i]
-        currentTr.className = 'read_item'
-        this.newsTable.appendChild(tableRows[i - 1])
-        this.newsTable.appendChild(currentTr)
-
-        var trSpacer = document.createElement('tr')
-        trSpacer.style.height = '5px'
-        this.newsTable.appendChild(trSpacer)
-      } else {
-        var previousTr = tableRows[i - 1]
-        var tdItems = previousTr.getElementsByTagName('td')
-        var mainTd = tdItems[tdItems.length - 1]
-        mainTd.id = itemID
-        mainTd.addEventListener('click', clickCallback)
-      }
-    } else {
-      continue
+  var clickCallback = function (ev) {
+    var el = ev.target
+    if (el.tagName === 'A' && el.classList.contains('storylink')) {
+      self.markRead(el.parentNode.parentNode.id)
     }
   }
 
-  // if no read items were found, place instructions
+  this.newsTable.addEventListener('click', clickCallback)
+
+  var items = this.newsTable.querySelectorAll('.athing')
+
+  items.forEach(function (item) {
+    if (item.id && self.isRead(item.id)) {
+      self.noReadItems = false
+
+      var footer = item.nextElementSibling
+      var spacer = footer.nextElementSibling
+
+      self.newsTable.appendChild(item)
+      self.newsTable.appendChild(footer)
+      self.newsTable.appendChild(spacer)
+    }
+  })
+
   if (this.noReadItems) {
     var trEmptyMessage = document.createElement('tr')
     var msgStr = '<td colspan=2></td><td>This is the place '
@@ -109,10 +71,6 @@ HNStack.prototype.parseReadItems = function () {
   }
 }
 
-/**
- * Marks an entry has read (adds its id to localStorage)
- * @param {String} id the id of the entry to mark has read
- */
 HNStack.prototype.markRead = function (id) {
   if (localStorage.hnstack_entries) {
     // check if storage has more than 500 entries, if so, trim it
@@ -125,10 +83,6 @@ HNStack.prototype.markRead = function (id) {
   }
 }
 
-/**
- * Checks if given entry was already read
- * @param {String} id the of the entry to check
- */
 HNStack.prototype.isRead = function (id) {
   return localStorage.hnstack_entries.indexOf(';' + id + ';') !== -1
 }
