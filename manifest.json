@@ -1,5 +1,5 @@
 {
-    "manifest_version": 2,
+  "manifest_version": 2,
 	"name": "Hacker News Stack",
 	"version": "0.6.1",
 	"description": "Focus on the really fresh and unread news in YCombinator - Hacker News. Relocate read items into the bottom of the website.",

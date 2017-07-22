@@ -5,7 +5,8 @@
   "description": "Focus on the really fresh and unread news in YCombinator - Hacker News. Relocate read items into the bottom of the website.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "pretest": "standard",
+    "test": "exit 0"
   },
   "repository": {
     "type": "git",
@@ -22,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/rogeriopvl/hnstack/issues"
   },
-  "homepage": "https://github.com/rogeriopvl/hnstack#readme"
+  "homepage": "https://github.com/rogeriopvl/hnstack#readme",
+  "devDependencies": {
+    "standard": "^10.0.2"
+  }
 }
