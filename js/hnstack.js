@@ -73,8 +73,8 @@ HNStack.prototype.parseReadItems = function () {
 
 HNStack.prototype.markRead = function (id) {
   if (localStorage.hnstack_entries) {
-    // check if storage has more than 500 entries, if so, trim it
-    if ((localStorage.hnstack_entries.match(/;/g) || []).length > 501) {
+    // check if storage has more than 1000 entries, if so, trim it
+    if ((localStorage.hnstack_entries.match(/;/g) || []).length > 1000) {
       this.cleanup()
     }
     localStorage.hnstack_entries += id + ';'
