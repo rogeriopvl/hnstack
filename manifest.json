@@ -1,6 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Hacker News Stack",
+  "short_name": "hnstack",
   "version": "1.0.0",
   "description": "Focus on the really fresh and unread news in YCombinator - Hacker News. Relocate read items into the bottom of the website.",
   "icons": {
