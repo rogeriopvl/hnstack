@@ -1,5 +1,7 @@
 # Hacker News Stack - Chrome extension
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/rogeriopvl/hnstack.svg)](https://greenkeeper.io/)
+
 ## Info
 This Google Chrome extension lets you focus on the really fresh and unread news in YCombinator - Hacker News. It relocates read items into the bottom of the HN website.
 
