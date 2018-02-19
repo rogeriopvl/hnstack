@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/rogeriopvl/hnstack#readme",
   "devDependencies": {
-    "standard": "^10.0.2"
+    "standard": "^11.0.0"
   },
   "standard": {
     "globals": ["chrome", "localStorage"]
